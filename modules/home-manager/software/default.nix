@@ -1,8 +1,0 @@
-{ pkgs, ... }:
-
-{
-  imports = [
-    ./cli
-    ./gui
-  ];
-}

@@ -4,11 +4,3 @@
   # List your module files here
   rain = import ./rain;
 }
-
-# { config, inputs, outputs, pkgs, ... }:
-
-# {
-#   imports = [
-#     ./services
-#   ];
-# }
