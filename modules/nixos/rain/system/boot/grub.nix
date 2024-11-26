@@ -18,6 +18,7 @@ in with lib; {
       device = "nodev";
       splashImage = null;
       backgroundColor = "#1e1e2e";
+      efiInstallAsRemovable = true;
       theme = pkgs.stdenv.mkDerivation {
         pname = "catppuccin-grub2";
         version = "v0.1";
