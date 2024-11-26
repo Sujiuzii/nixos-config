@@ -6,8 +6,7 @@ in with lib; {
   imports = [
     ./firefox.nix
     ./vscode.nix
-
-    # ./gtk.nix
+    ./gtk.nix
   ];
 
   options = {

@@ -55,6 +55,7 @@ in with lib; {
           in lib.mkOptionDefault {
             "Ctrl+${modifier}+l" = "exec i3lock-fancy";
             "${modifier}+Shift+e" = "exec xfce4-session-logout";
+            "${modifier}+w" = "exec firefox";
             "${modifier}+d" = "exec --no-startup-id rofi -no-config -no-lazy-grab -show drun -modi drun -theme ${polybar-config}/docky/scripts/rofi/launcher.rasi";
           };
         startup = 
@@ -62,15 +63,15 @@ in with lib; {
             { command = "picom"; always = false; }
             { command = "firefox"; always = false; }
             { command = "qq"; always = false; }
-            { command = "clash-nyanpasu"; always = false; }
+            { command = "clash-meta -d /home/suhui/.config/clash-service"; always = false; }
           ];
         assigns = {
           "number 1: terminal" = [{ class = "non-existent"; }];
           "number 2: Code" = [{ class = "Code"; }];
-          "number 7: QQ" = [{ class = "QQ"; }];
-          "number 8: TelegramDesktop" = [{ class = "TelegramDesktop"; }];
-          "number 9: thunderbird" = [{ class = "thunderbird"; }];
+          "number 9: QQ" = [{ class = "QQ"; }];
           "number 10: firefox" = [{ class = "firefox"; }];
+          # "number 8: TelegramDesktop" = [{ class = "TelegramDesktop"; }];
+          # "number 9: thunderbird" = [{ class = "thunderbird"; }];
         };
         defaultWorkspace = "workspace number 1";
         floating.criteria = [
