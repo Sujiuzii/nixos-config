@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -10,20 +10,19 @@
 
   # Configure the NVIDIA graphic card.
   hardware = {
-    opengl = {
+    graphics = {
       enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
+      enable32Bit = true;
     };
     nvidia = {
       package = config.boot.kernelPackages.nvidiaPackages.stable;
-      # prime = {
-      #   offload.enable = true;
-      #   offload.enableOffloadCmd = true;
-      #   intelBusId = "PCI:00:02:0";
-      #   nvidiaBusId = "PCI:01:00:0";
-      # };
-      # open = true;
+      prime = {
+        offload.enable = true;
+        offload.enableOffloadCmd = true;
+        intelBusId = "PCI:00:02:0";
+        nvidiaBusId = "PCI:01:00:0";
+      };
+      open = false;
       modesetting.enable = true;
       powerManagement.enable = false;
       powerManagement.finegrained = false;
@@ -31,9 +30,21 @@
     };
   };
 
-  networking.networkmanager.enable = true;
+  specialisation = {
+    gaming-time.configuration = {
+      hardware.nvidia = {
+        prime.sync.enable = lib.mkForce true;
+        prime.offload = {
+          enable = lib.mkForce false;
+          enableOffloadCmd = lib.mkForce false;
+        };
+      };
+    };
+  };
 
-  # services.xserver.videoDrivers = [ "modesetting" "nvidia" ];
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  networking.networkmanager.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

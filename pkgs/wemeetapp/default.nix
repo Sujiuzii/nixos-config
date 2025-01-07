@@ -1,7 +1,7 @@
 { 
   lib, stdenv, fetchurl, dpkg
-, wayland, nss, nspr, zlib, xorg, freetype, libgpgerror, fontconfig, expat
-, pciutils, alsaLib, harfbuzz, glib, pulseaudio, lz4, libtiff, libglvnd
+, wayland, nss, nspr, zlib, xorg, freetype, libgpg-error, fontconfig, expat
+, pciutils, alsa-lib, harfbuzz, glib, pulseaudio, lz4, libtiff, libglvnd
 }:
 
 let
@@ -10,8 +10,8 @@ let
   md5 = "e078bf97365540d9f0ff063f93372a9c";
 
   rpath = lib.makeLibraryPath [
-    expat libglvnd wayland nss nspr zlib freetype libgpgerror
-    fontconfig pciutils alsaLib harfbuzz glib pulseaudio lz4 libtiff
+    expat libglvnd wayland nss nspr zlib freetype libgpg-error
+    fontconfig pciutils alsa-lib harfbuzz glib pulseaudio lz4 libtiff
     xorg.libSM xorg.libICE xorg.libxcb xorg.libXtst
   ] + ":${stdenv.cc.cc.lib}/lib64";
 

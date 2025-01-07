@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   cfg = config.rain.software.desktop.games;
@@ -10,6 +10,13 @@ in with lib; {
   };
 
   config = mkIf cfg.enable {
-    programs.steam.enable = true;
+    programs.steam = {
+      enable = true;
+      gamescopeSession.enable = true;
+    };
+    programs.gamemode.enable = true;
+    environment.systemPackages = with pkgs; [
+      mangohud
+    ];
   };
 }

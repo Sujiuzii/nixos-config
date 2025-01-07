@@ -63,15 +63,16 @@ in with lib; {
             { command = "picom"; always = false; }
             { command = "firefox"; always = false; }
             { command = "qq"; always = false; }
+            { command = "thunderbird"; always = false; }
             { command = "clash-meta -d /home/suhui/.config/clash-service"; always = false; }
           ];
         assigns = {
           "number 1: terminal" = [{ class = "non-existent"; }];
           "number 2: Code" = [{ class = "Code"; }];
+          "number 8: thunderbird" = [{ class = "thunderbird"; }];
           "number 9: QQ" = [{ class = "QQ"; }];
           "number 10: firefox" = [{ class = "firefox"; }];
           # "number 8: TelegramDesktop" = [{ class = "TelegramDesktop"; }];
-          # "number 9: thunderbird" = [{ class = "thunderbird"; }];
         };
         defaultWorkspace = "workspace number 1";
         floating.criteria = [

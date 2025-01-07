@@ -34,11 +34,9 @@ in with lib; {
       typora
       drawio
       chromium
-      clash-nyanpasu
-      # xfce.thunar
+      evince
 
-      # A GUI tool for Flatpak
-      discover
+      clash-verge-rev
 
       # terminal emulator
       kitty

@@ -14,16 +14,15 @@ in with lib; {
       inactiveOpacity = 1;
       activeOpacity = 1;
       opacityRules = [
-	"85:class_g  = 'Rofi'"
+	"95:class_g  = 'Rofi'"
 	"85:name  = 'Startpage Search Results – Mozilla Firefox'"
         "85:name  = 'Mozilla Firefox'"
-        "90:name  = 'Iscrizioni - FreeTube'"
 	"90:class_g  = 'Thunar'"
 	"90:class_g  = 'Anki'"
-        "80:class_g  = 'kitty'"
+        "85:class_g  = 'kitty'"
         "80:class_g  = 'QQ'"
         "80:class_g  = 'Spotify'"
-        "80:class_g  = 'Code'"
+        "85:class_g  = 'Code'"
       ];
     };
   };

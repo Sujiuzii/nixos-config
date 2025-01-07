@@ -15,28 +15,32 @@ in with lib; {
       enableDefaultPackages = true;
 
       packages = with pkgs; [
+        feather
+
         # icon fonts
         material-design-icons
 
         source-han-sans-simplified-chinese
-        (nerdfonts.override { fonts = [ "Hack" ]; })
+
+        # (nerdfonts.override { fonts = [ "Hack" "FiraCode" "JetBrainsMono" "Iosevka" ]; })
+        nerd-fonts.hack
+        nerd-fonts.fira-code
+        nerd-fonts.jetbrains-mono
+        nerd-fonts.iosevka
    
         # normal fonts
         noto-fonts
-        noto-fonts-cjk
+        noto-fonts-cjk-sans
         noto-fonts-emoji
-   
-        # nerdfonts
-        (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono"];})
       ];
    
-      fontconfig = {
-        defaultFonts = {
-          serif = [ "Source Han Serif SC" "Hack" ];
-          sansSerif = [ "Source Han Sans SC" "Hack" ];
-          monospace = [ "Hack" ];
-        };
-      };
+      # fontconfig = {
+      #   defaultFonts = {
+      #     serif = [ "Source Han Serif SC" "Hack" ];
+      #     sansSerif = [ "Source Han Sans SC" "Hack" ];
+      #     monospace = [ "Hack" ];
+      #   };
+      # };
     };
   };
 }

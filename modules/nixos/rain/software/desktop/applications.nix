@@ -12,7 +12,7 @@ in with lib; {
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       # office
-      unstable.qq
+      qq
       libreoffice
       outputs.packages.wemeetapp
 
@@ -24,6 +24,10 @@ in with lib; {
 
       # pdf
       okular
+
+      # tty & rdp
+      putty
+      remmina
     ];
 
     # Enable flatpak for all users

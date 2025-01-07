@@ -2,16 +2,19 @@
   description = "A flake for daily use based on configuration of Crabtux";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/release-24.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "github:nixos/nixpkgs/release-24.05";
+    # nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     nur.url = "github:nix-community/NUR";
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/master";
+      # url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, nur, home-manager, ... }@inputs: 
+  outputs = { self, nixpkgs, nixpkgs-stable, nur, home-manager, ... }@inputs: 
     let
       inherit (self) outputs;
       system = "x86_64-linux";
@@ -29,7 +32,7 @@
           modules = 
             [
               ./hosts/lenovo
-              nur.nixosModules.nur
+              nur.modules.nixos.default
               home-manager.nixosModules.home-manager
               {
                 home-manager.useGlobalPkgs = true;

@@ -26,7 +26,7 @@ in with lib; {
           owner = "catppuccin";
           repo = "grub";
           rev = "main";
-          hash = "sha256-bDw+W69jeSiE1VBdQqqaeZf7OqCN7q5XYJ5+94PILXE=";
+          hash = "sha256-20D1EcV8SWOd5BLdAc6FaQu3onha0+aS5yA/GK8Ra0g=";
         };
         installPhase = ''
           cp -r $src/src/catppuccin-mocha-grub-theme $out

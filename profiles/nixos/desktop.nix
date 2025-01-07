@@ -12,7 +12,7 @@
 
   nixpkgs = {
     overlays = [
-      outputs.overlays.unstable-packages
+      outputs.overlays.stable-packages
       outputs.overlays.modifications
     ];
     config.allowUnfree = true;
@@ -68,6 +68,7 @@
     XMODIFIERS = "@im=fcitx";
     INPUT_METHOD = "fcitx";
     GLFW_IM_MODULE = "ibus";
+    TERM = "xterm-256color";
   };
 
   virtualisation.docker.enable = true;
