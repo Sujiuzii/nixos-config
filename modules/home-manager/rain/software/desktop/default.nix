@@ -35,6 +35,7 @@ in with lib; {
       drawio
       chromium
       evince
+      qcm
 
       clash-verge-rev
 

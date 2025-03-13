@@ -19,6 +19,8 @@ in with lib; {
 
         # icon fonts
         material-design-icons
+        font-awesome
+        icomoon-feather
 
         source-han-sans-simplified-chinese
 
@@ -34,13 +36,13 @@ in with lib; {
         noto-fonts-emoji
       ];
    
-      # fontconfig = {
-      #   defaultFonts = {
-      #     serif = [ "Source Han Serif SC" "Hack" ];
-      #     sansSerif = [ "Source Han Sans SC" "Hack" ];
-      #     monospace = [ "Hack" ];
-      #   };
-      # };
+      fontconfig = {
+        defaultFonts = {
+          serif = [ "Source Han Serif SC" "Hack" ];
+          sansSerif = [ "Source Han Sans SC" "Hack" ];
+          monospace = [ "Hack" ];
+        };
+      };
     };
   };
 }

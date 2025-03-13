@@ -23,14 +23,9 @@ in with lib; {
   # add home host cli tools here
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
+      htop
       neofetch
-      fastfetch
-      clash-meta
-      nitrogen
-      (rizin.withPlugins (ps: with ps; [
-        rz-ghidra
-        sigdb
-      ]))
+      ranger
       appimage-run
       cudatoolkit
       ncdu

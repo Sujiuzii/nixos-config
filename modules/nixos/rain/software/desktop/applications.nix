@@ -22,12 +22,16 @@ in with lib; {
       # graphics
       gimp
 
-      # pdf
-      okular
-
       # tty & rdp
       putty
       remmina
+
+      nitrogen
+      (rizin.withPlugins (ps: with ps; [
+        rz-ghidra
+        sigdb
+      ]))
+
     ];
 
     # Enable flatpak for all users

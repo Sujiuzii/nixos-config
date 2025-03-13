@@ -23,6 +23,7 @@ in with lib; {
         "80:class_g  = 'QQ'"
         "80:class_g  = 'Spotify'"
         "85:class_g  = 'Code'"
+        "85:class_g  = 'Qcm'"
       ];
     };
   };

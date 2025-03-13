@@ -6,8 +6,8 @@
   ];
 
   home = {
-    username = "suhui";
-    homeDirectory = "/home/suhui";
+    username = "zjb";
+    homeDirectory = "/home/zjb";
   };
 
   rain.home = {
