@@ -17,25 +17,25 @@ in with lib; {
       applet = {
         app-menu = mkOption {
           type = types.enum ["rofi"];
-          default = "disable";
+          default = "rofi";
           description = "Choose app-menu applet for i3wm";
         };
 
         bar = mkOption {
           type = types.enum ["polybar"];
-          default = "disable";
+          default = "polybar";
           description = "Choose status bar for i3wm";
         };
 
         compositor = mkOption {
           type = types.enum ["picom"];
-          default = "disable";
+          default = "picom";
           description = "Choose compositor for i3wm";
         };
 
         screensaver = mkOption {
           type = types.enum ["i3lock-fancy"];
-          default = "disable";
+          default = "i3lock-fancy";
           description = "Choose screensaver for i3wm";
         };
       };

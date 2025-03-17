@@ -41,10 +41,10 @@
         };
       };
 
-      homeConfiguration = {
+      homeConfigurations = {
         ustcnet-3660 = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
-          extraSpecialArgs = { inherit nixpkgs system; };
+          extraSpecialArgs = { inherit nixpkgs outputs system; };
           modules = [
             ./hosts/ustcnet-3660/home.nix
           ];

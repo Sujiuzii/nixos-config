@@ -41,6 +41,8 @@ in with lib; {
 
       # terminal emulator
       kitty
+
+      ida-free
     ];
   };
 }

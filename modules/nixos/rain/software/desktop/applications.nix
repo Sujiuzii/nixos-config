@@ -14,7 +14,7 @@ in with lib; {
       # office
       qq
       libreoffice
-      outputs.packages.wemeetapp
+      wemeet
 
       # video
       obs-studio

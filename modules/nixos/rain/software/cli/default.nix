@@ -45,6 +45,7 @@ in with lib; {
       termshark
       tcpdump
 
+      clash-meta
     ];
 
     programs.fish.enable = true;

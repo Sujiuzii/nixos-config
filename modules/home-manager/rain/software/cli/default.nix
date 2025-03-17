@@ -27,7 +27,6 @@ in with lib; {
       neofetch
       ranger
       appimage-run
-      cudatoolkit
       ncdu
       unar
     ];
