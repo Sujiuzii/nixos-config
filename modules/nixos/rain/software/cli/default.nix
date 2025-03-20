@@ -34,6 +34,7 @@ in with lib; {
       file
       fzf
       ripgrep
+      jq
 
       # Network Utilities
       dnsutils
@@ -46,6 +47,8 @@ in with lib; {
       tcpdump
 
       clash-meta
+
+      shell-gpt
     ];
 
     programs.fish.enable = true;

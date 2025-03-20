@@ -5,9 +5,12 @@
     programs.fish = {
       enable = true;
       shellAliases = {
-        nixos-update = "sudo nixos-rebuild switch -v";
-        nixos-edit = "cd /etc/nixos; sudo vim /etc/nixos/flake.nix; cd -;";
+        ds = "sgpt";
+        clash-proxy = "http_proxy=127.0.0.1:7890 https_proxy=127.0.0.1:7890";
       };
+      shellInit = ''
+        set -gx TERM xterm-256color
+      '';
     };
   };
 }
