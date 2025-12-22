@@ -9,9 +9,13 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, nur, home-manager, ... }@inputs: 
+  outputs = { self, nixpkgs, nixpkgs-stable, nur, home-manager, nix-darwin, ... }@inputs: 
     let
       inherit (self) outputs;
       system = "x86_64-linux";
@@ -38,6 +42,23 @@
                 home-manager.extraSpecialArgs = { inherit inputs outputs; };
               }
             ];
+        };
+      };
+
+      darwinConfigurations = {
+        macos = nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          specialArgs = { inherit inputs outputs; };
+          modules = [
+            ./hosts/macos
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.suhui = import ./hosts/macos/home.nix;
+              home-manager.extraSpecialArgs = { inherit inputs outputs; };
+            }
+          ];
         };
       };
 
