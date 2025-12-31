@@ -1,0 +1,260 @@
+{ pkgs, ... }:
+
+{
+  environment.systemPackages = with pkgs; [
+    vim git wget
+  ];
+
+  nix = {
+    enable = true;
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      substituters = [ "https://mirrors.ustc.edu.cn/nix-channels/store" ];
+      trusted-public-keys = [ "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" ];
+      trusted-users = [ "root" "suhui" ];
+    };
+  };
+
+  system.stateVersion = 5;
+  nixpkgs.hostPlatform = "aarch64-darwin";
+  
+  system.primaryUser = "suhui";
+
+  users.users.suhui = {
+    name = "suhui";
+    home = "/Users/suhui";
+  };
+  
+  fonts.packages = with pkgs; [ maple-mono.NF ];
+
+  # 必须开启 zsh 才能生成 /etc/zshrc，这是加载 home-manager zsh 的前提
+  programs.zsh.enable = true; 
+
+  # Aerospace 配置 (保持你之前的配置)
+  services.aerospace = {
+    enable = true;
+
+    settings = {
+      after-login-command = [];
+      after-startup-command = [ "exec-and-forget sketchybar" ];
+
+      exec-on-workspace-change = [
+        "/bin/bash"
+        "-c"
+        "sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE"
+      ];
+
+      enable-normalization-flatten-containers = true;
+      enable-normalization-opposite-orientation-for-nested-containers = true;
+
+      accordion-padding = 30;
+      default-root-container-layout = "accordion";
+      default-root-container-orientation = "vertical";
+
+      key-mapping.preset = "qwerty";
+      on-focused-monitor-changed = [ "move-mouse monitor-lazy-center" ];
+
+      gaps = {
+        inner.horizontal = 18;
+        inner.vertical = 18;
+        outer.left = 18;
+        outer.bottom = 18;
+        outer.top = 18;
+        outer.right = 18;
+      };
+
+      mode.main.binding = {
+        # 布局切换
+        "alt-slash" = "layout tiles horizontal vertical";
+        "alt-comma" = "layout accordion vertical horizontal";
+
+        # 焦点移动
+        "alt-h" = "focus left";
+        "alt-j" = "focus down";
+        "alt-k" = "focus up";
+        "alt-l" = "focus right";
+
+        # 窗口移动
+        "alt-shift-h" = "move left";
+        "alt-shift-j" = "move down";
+        "alt-shift-k" = "move up";
+        "alt-shift-l" = "move right";
+
+        # 工作区切换
+        "alt-1" = "workspace 1";
+        "alt-2" = "workspace 2";
+        "alt-3" = "workspace 3";
+        "alt-4" = "workspace 4";
+        "alt-5" = "workspace 5";
+        "alt-6" = "workspace 6";
+        "alt-7" = "workspace 7";
+        "alt-8" = "workspace 8";
+        "alt-9" = "workspace 9";
+        "alt-0" = "workspace 0";
+        "alt-d" = "workspace D";
+        "alt-s" = "workspace S";
+        "alt-b" = "workspace B";
+        "alt-t" = "workspace T";
+        "alt-v" = "workspace V";
+        "alt-n" = "workspace N";
+        "alt-m" = "workspace M";
+
+        # 移动窗口到工作区
+        "alt-shift-1" = "move-node-to-workspace 1";
+        "alt-shift-2" = "move-node-to-workspace 2";
+        "alt-shift-3" = "move-node-to-workspace 3";
+        "alt-shift-4" = "move-node-to-workspace 4";
+        "alt-shift-5" = "move-node-to-workspace 5";
+        "alt-shift-6" = "move-node-to-workspace 6";
+        "alt-shift-7" = "move-node-to-workspace 7";
+        "alt-shift-8" = "move-node-to-workspace 8";
+        "alt-shift-9" = "move-node-to-workspace 9";
+        "alt-shift-0" = "move-node-to-workspace 0";
+        "alt-shift-d" = "move-node-to-workspace D";
+        "alt-shift-s" = "move-node-to-workspace S";
+        "alt-shift-b" = "move-node-to-workspace B";
+        "alt-shift-t" = "move-node-to-workspace T";
+        "alt-shift-v" = "move-node-to-workspace V";
+        "alt-shift-n" = "move-node-to-workspace N";
+        "alt-shift-m" = "move-node-to-workspace M";
+
+        # 其他功能
+        "alt-shift-f" = "fullscreen";
+        "alt-tab" = "workspace-back-and-forth";
+        "alt-shift-tab" = "move-workspace-to-monitor --wrap-around next";
+        "alt-shift-semicolon" = "mode service";
+        "alt-shift-r" = "mode resize";
+      };
+
+      # === Resize 模式 ===
+      mode.resize.binding = {
+        h = "resize width -50";
+        j = "resize height +50";
+        k = "resize height -50";
+        l = "resize width +50";
+        b = "balance-sizes";
+        minus = "resize smart -50";
+        equal = "resize smart +50";
+        enter = "mode main";
+        esc = "mode main";
+      };
+
+      # === Service 模式 ===
+      mode.service.binding = {
+        esc = [ "reload-config" "mode main" ];
+        r = [ "flatten-workspace-tree" "mode main" ];
+        f = [ "layout floating tiling" "mode main" ];
+        backspace = [ "close-all-windows-but-current" "mode main" ];
+        "alt-shift-h" = [ "join-with left" "mode main" ];
+        "alt-shift-j" = [ "join-with down" "mode main" ];
+        "alt-shift-k" = [ "join-with up" "mode main" ];
+        "alt-shift-l" = [ "join-with right" "mode main" ];
+      };
+
+      on-window-detected = [
+        {
+          "if".app-id = "com.github.wez.wezterm";
+          run = "move-node-to-workspace T";
+        }
+        {
+          "if".app-id = "net.kovidgoyal.kitty";
+          run = "move-node-to-workspace T";
+        }
+        {
+          "if".app-id = "com.mitchellh.ghostty";
+          run = "move-node-to-workspace T";
+        }
+        {
+          "if".app-id = "com.apple.Music";
+          run = "move-node-to-workspace M";
+        }
+        {
+            "if".app-id = "com.google.Chrome";
+          run = "move-node-to-workspace B";
+        }
+        {
+            "if".app-id = "org.mozilla.firefox";
+          run = "move-node-to-workspace B";
+        }
+        {
+          "if".app-id = "company.thebrowser.Browser"; # Arc
+          run = "move-node-to-workspace B";
+        }
+        {
+          "if".app-id = "com.microsoft.VSCode";
+          run = "move-node-to-workspace V";
+        }
+        {
+          "if".app-id = "com.todesktop.230313mzl4w4u92"; # Cursor
+          run = "move-node-to-workspace V";
+        }
+        {
+          "if".app-id = "com.google.android.studio";
+          run = "move-node-to-workspace I";
+        }
+        {
+          "if".app-id = "com.apple.dt.Xcode";
+          run = "move-node-to-workspace I";
+        }
+        {
+          "if".app-id = "com.tinyspeck.slackmacgap";
+          run = "move-node-to-workspace S";
+        }
+        {
+          "if".app-id = "com.apple.iphonesimulator";
+          run = "move-node-to-workspace T";
+        }
+        {
+          "if".app-id = "notion.id";
+          run = "move-node-to-workspace N";
+        }
+        {
+          "if".app-id = "com.tencent.qq";
+          run = "move-node-to-workspace D";
+        }
+        {
+          "if".app-id = "com.apple.finder";
+          run = "layout floating";
+        }
+        {
+          "if".app-id = "com.apple.ActivityMonitor";
+          run = "layout floating";
+        }
+        {
+          "if".app-id = "NULL-APP-BUNDLE-ID";
+          run = "move-node-to-workspace T";
+        }
+      ];
+    };
+  };
+
+  # Homebrew 配置
+  homebrew = {
+    enable = true;
+    onActivation.cleanup = "zap";
+    onActivation.autoUpdate = true;
+    onActivation.upgrade = true;
+    taps = [
+        "caarlos0/tap"
+        "felixkratz/formulae"
+        "TheBoredTeam/boring-notch"
+    ];
+    brews = [
+        "utimer" "cloudflared" "doctl" "fastfetch" "fd" "sketchybar" 
+        "gemini-cli" "git" "glow" "go" "helm" "neovim" "redis" 
+        "ripgrep" "yazi" "mihomo" "fish" "kubernetes-cli" 
+        "fancy-cat" "btop"
+    ];
+    casks = [
+        "1password-cli" "claude-code" "font-sf-pro" "ghostty" "kitty" 
+        "obsidian" "raycast" "sf-symbols" "wezterm" "clash-verge-rev" 
+        "qq" "firefox" "bluestacks" "bilibili" "anki" "visual-studio-code" 
+        "wechat" "squirrel-app" "tailscale-app" "tencent-meeting" 
+        "steam" "neteasemusic" "typora" "foxitreader"
+        {
+          name = "boring-notch";
+          args = { no_quarantine = true; };
+        }
+    ];
+  };
+}

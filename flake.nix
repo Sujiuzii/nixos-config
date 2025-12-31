@@ -24,13 +24,14 @@
       packages = import ./pkgs pkgs;
       overlays = import ./overlays { inherit inputs pkgs; };
       nixosModules = import ./modules/nixos;
+      darwinModules = import ./modules/darwin;
       homeManagerModules = import ./modules/home-manager;
 
       nixosConfigurations = {
         lenovo = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit inputs outputs; };
-          modules = 
+          modules =
             [
               ./hosts/lenovo
               nur.modules.nixos.default
@@ -50,14 +51,8 @@
           system = "aarch64-darwin";
           specialArgs = { inherit inputs outputs; };
           modules = [
-            ./hosts/macos
+            ./profiles/darwin
             home-manager.darwinModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.suhui = import ./hosts/macos/home.nix;
-              home-manager.extraSpecialArgs = { inherit inputs outputs; };
-            }
           ];
         };
       };

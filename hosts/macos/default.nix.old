@@ -1,0 +1,492 @@
+{ pkgs, ... }:
+
+{
+  # List packages installed in system profile. To search by name, run:
+  # $ nix-env -qaP | grep wget
+  environment.systemPackages = with pkgs; [
+    vim
+    telegram-desktop
+    termpdfpy
+  ];
+
+  # Auto upgrade nix package and the daemon service.
+  # services.nix-daemon.enable = true;
+  # nix.package = pkgs.nix;
+  nix = {
+    enable = true;
+    
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+
+      substituters = [
+        "https://mirrors.ustc.edu.cn/nix-channels/store"
+      ];
+
+      trusted-public-keys = [
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      ];
+
+      trusted-users = [ "root" "suhui" ];
+    };
+  };
+
+
+  # Necessary for using flakes on this system.
+  # nix.enable = true;
+  # nix.settings.experimental-features = "nix-command flakes";
+
+  # Create /etc/zshrc that loads the nix-darwin environment.
+  # programs.zsh.enable = true;  # default shell on catalina
+
+  # Set Git commit hash for darwin-version.
+  # system.configurationRevision = self.rev or self.dirtyRev or null;
+
+  # Used for backwards compatibility, please read the changelog before changing.
+  # $ darwin-rebuild changelog
+  system.stateVersion = 5;
+
+  # The platform the configuration will be used on.
+  nixpkgs.hostPlatform = "aarch64-darwin";
+
+  system.primaryUser = "suhui";
+
+  users.users.suhui = {
+    name = "suhui";
+    home = "/Users/suhui";
+  };
+
+  fonts.packages = with pkgs; [
+    maple-mono.NF
+  ];
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
+  services.aerospace = {
+    enable = true;
+
+    settings = {
+      after-login-command = [];
+      after-startup-command = [ "exec-and-forget sketchybar" ];
+      
+      exec-on-workspace-change = [
+        "/bin/bash"
+        "-c"
+        "sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE"
+      ];
+
+      enable-normalization-flatten-containers = true;
+      enable-normalization-opposite-orientation-for-nested-containers = true;
+
+      accordion-padding = 30;
+      default-root-container-layout = "accordion";
+      default-root-container-orientation = "vertical";
+
+      key-mapping.preset = "qwerty";
+      on-focused-monitor-changed = [ "move-mouse monitor-lazy-center" ];
+
+      gaps = {
+        inner.horizontal = 18;
+        inner.vertical = 18;
+        outer.left = 18;
+        outer.bottom = 18;
+        outer.top = 18;
+        outer.right = 18;
+      };
+
+      mode.main.binding = {
+        # 布局切换
+        "alt-slash" = "layout tiles horizontal vertical";
+        "alt-comma" = "layout accordion vertical horizontal";
+
+        # 焦点移动
+        "alt-h" = "focus left";
+        "alt-j" = "focus down";
+        "alt-k" = "focus up";
+        "alt-l" = "focus right";
+
+        # 窗口移动
+        "alt-shift-h" = "move left";
+        "alt-shift-j" = "move down";
+        "alt-shift-k" = "move up";
+        "alt-shift-l" = "move right";
+
+        # 工作区切换
+        "alt-1" = "workspace 1";
+        "alt-2" = "workspace 2";
+        "alt-3" = "workspace 3";
+        "alt-4" = "workspace 4";
+        "alt-5" = "workspace 5";
+        "alt-6" = "workspace 6";
+        "alt-7" = "workspace 7";
+        "alt-8" = "workspace 8";
+        "alt-9" = "workspace 9";
+        "alt-0" = "workspace 0";
+        "alt-d" = "workspace D";
+        "alt-s" = "workspace S";
+        "alt-b" = "workspace B";
+        "alt-t" = "workspace T";
+        "alt-v" = "workspace V";
+        "alt-n" = "workspace N";
+        "alt-m" = "workspace M";
+
+        # 移动窗口到工作区
+        "alt-shift-1" = "move-node-to-workspace 1";
+        "alt-shift-2" = "move-node-to-workspace 2";
+        "alt-shift-3" = "move-node-to-workspace 3";
+        "alt-shift-4" = "move-node-to-workspace 4";
+        "alt-shift-5" = "move-node-to-workspace 5";
+        "alt-shift-6" = "move-node-to-workspace 6";
+        "alt-shift-7" = "move-node-to-workspace 7";
+        "alt-shift-8" = "move-node-to-workspace 8";
+        "alt-shift-9" = "move-node-to-workspace 9";
+        "alt-shift-0" = "move-node-to-workspace 0";
+        "alt-shift-d" = "move-node-to-workspace D";
+        "alt-shift-s" = "move-node-to-workspace S";
+        "alt-shift-b" = "move-node-to-workspace B";
+        "alt-shift-t" = "move-node-to-workspace T";
+        "alt-shift-v" = "move-node-to-workspace V";
+        "alt-shift-n" = "move-node-to-workspace N";
+        "alt-shift-m" = "move-node-to-workspace M";
+
+        # 其他功能
+        "alt-shift-f" = "fullscreen";
+        "alt-tab" = "workspace-back-and-forth";
+        "alt-shift-tab" = "move-workspace-to-monitor --wrap-around next";
+        "alt-shift-semicolon" = "mode service";
+        "alt-shift-r" = "mode resize";
+      };
+
+      # === Resize 模式 ===
+      mode.resize.binding = {
+        h = "resize width -50";
+        j = "resize height +50";
+        k = "resize height -50";
+        l = "resize width +50";
+        b = "balance-sizes";
+        minus = "resize smart -50";
+        equal = "resize smart +50";
+        enter = "mode main";
+        esc = "mode main";
+      };
+
+      # === Service 模式 ===
+      mode.service.binding = {
+        esc = [ "reload-config" "mode main" ];
+        r = [ "flatten-workspace-tree" "mode main" ];
+        f = [ "layout floating tiling" "mode main" ];
+        backspace = [ "close-all-windows-but-current" "mode main" ];
+        "alt-shift-h" = [ "join-with left" "mode main" ];
+        "alt-shift-j" = [ "join-with down" "mode main" ];
+        "alt-shift-k" = [ "join-with up" "mode main" ];
+        "alt-shift-l" = [ "join-with right" "mode main" ];
+      };
+
+      on-window-detected = [
+        {
+          "if".app-id = "com.github.wez.wezterm";
+          run = "move-node-to-workspace T";
+        }
+        {
+          "if".app-id = "net.kovidgoyal.kitty";
+          run = "move-node-to-workspace T";
+        }
+        {
+          "if".app-id = "com.mitchellh.ghostty";
+          run = "move-node-to-workspace T";
+        }
+        {
+          "if".app-id = "com.apple.Music";
+          run = "move-node-to-workspace M";
+        }
+        {
+            "if".app-id = "com.google.Chrome";
+          run = "move-node-to-workspace B";
+        }
+        {
+            "if".app-id = "org.mozilla.firefox";
+          run = "move-node-to-workspace B";
+        }
+        {
+          "if".app-id = "company.thebrowser.Browser"; # Arc
+          run = "move-node-to-workspace B";
+        }
+        {
+          "if".app-id = "com.microsoft.VSCode";
+          run = "move-node-to-workspace V";
+        }
+        {
+          "if".app-id = "com.todesktop.230313mzl4w4u92"; # Cursor
+          run = "move-node-to-workspace V";
+        }
+        {
+          "if".app-id = "com.google.android.studio";
+          run = "move-node-to-workspace I";
+        }
+        {
+          "if".app-id = "com.apple.dt.Xcode";
+          run = "move-node-to-workspace I";
+        }
+        {
+          "if".app-id = "com.tinyspeck.slackmacgap";
+          run = "move-node-to-workspace S";
+        }
+        {
+          "if".app-id = "com.apple.iphonesimulator";
+          run = "move-node-to-workspace T";
+        }
+        {
+          "if".app-id = "notion.id";
+          run = "move-node-to-workspace N";
+        }
+        {
+          "if".app-id = "com.tencent.qq";
+          run = "move-node-to-workspace D";
+        }
+        {
+          "if".app-id = "com.apple.finder";
+          run = "layout floating";
+        }
+        {
+          "if".app-id = "com.apple.ActivityMonitor";
+          run = "layout floating";
+        }
+        {
+          "if".app-id = "NULL-APP-BUNDLE-ID";
+          run = "move-node-to-workspace T";
+        }
+      ];
+    };
+  };
+
+  # 1. 启用并配置常用工具 (替代原本的 manual install 和 alias)
+  
+  # 替代: alias cd="z" 和 eval "$(zoxide init zsh)"
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+    options = [ "--cmd cd" ]; # 这会自动把 cd 替换为 z
+  };
+
+  # 替代: eza 的各种 alias
+  programs.eza = {
+    enable = true;
+    enableZshIntegration = true;
+    icons = "auto";
+    git = true;
+    extraOptions = [ "--group-directories-first" "--header" ];
+  };
+
+  # 替代: fzf install 和 eval "$(fzf --zsh)"
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+  
+  # 替代: lazygit
+  programs.lazygit.enable = true;
+
+  # 替代: Oh My Posh
+  programs.oh-my-posh = {
+    enable = true;
+    enableZshIntegration = true;
+    # 假设你的配置文件在原来的位置，或者你可以把它移到 nix store 中管理
+    # 如果你想保持原样读取本地文件：
+    configFile = "${config.home.homeDirectory}/.config/oh-my-posh/themes/powerlevel10k-custom.yaml";
+    
+    # 或者（进阶玩法）：把 yaml 内容直接写在 nix 里，或者把文件放在 flake 目录下引用
+    # configFile = ./path/to/my-theme.yaml; 
+  };
+
+  # 2. Zsh 核心配置
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true; # 替代 autoload -Uz compinit
+    
+    # 替代: Zinit 的 autosuggestions 和 syntax-highlighting
+    autosuggestions.enable = true;
+    syntaxHighlighting = {
+      enable = true;
+      # 你的自定义高亮样式
+      styles = {
+        "command" = "fg=white";
+        "alias" = "fg=white";
+        "builtin" = "fg=white";
+        "precommand" = "fg=white";
+        "default" = "fg=white";
+        "function" = "fg=white";
+      };
+    };
+
+    # 替代: Zinit snippets (OMZL::git.zsh, OMZP::git, aws, kubectl, etc.)
+    # Home Manager 内置了 oh-my-zsh 模块，直接启用插件即可
+    oh-my-zsh = {
+      enable = true;
+      plugins = [ 
+        "git" 
+        "aws" 
+        "kubectl" 
+        "kubectx" 
+        "command-not-found" 
+        # "vi-mode" # 注意：你用的是 jeffreytse/zsh-vi-mode，不是 omz 自带的，所以这里不加
+      ];
+    };
+
+    # 替代: 手动定义的 aliases
+    shellAliases = {
+      ".." = "cd ..";
+      "..." = "cd ../..";
+      "n" = "nvim";
+      "lg" = "lazygit";
+      # eza 的 alias 已经被 programs.eza 处理了大部分，
+      # 如果你需要特定的 ltree:
+      "ltree" = "eza --tree --level=2 --long --icons";
+      "clear" = "clear && tmux clear-history 2>/dev/null || clear"; # 稍微优化了一下你的 clear 函数
+    };
+
+    # 替代: History 配置
+    history = {
+      size = 5000;
+      save = 5000;
+      path = "${config.home.homeDirectory}/.zsh_history";
+      ignoreDups = true;
+      share = true;
+      ignoreSpace = true;
+    };
+
+    # 3. Zsh 插件 (处理那些不是 OMZ 内置的插件)
+    plugins = [
+      {
+        # 替代: zinit light jeffreytse/zsh-vi-mode
+        name = "zsh-vi-mode";
+        src = pkgs.zsh-vi-mode;
+        file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+      }
+      {
+        # 替代: zinit light Aloxaf/fzf-tab
+        name = "fzf-tab";
+        src = pkgs.zsh-fzf-tab;
+        file = "share/fzf-tab/fzf-tab.plugin.zsh";
+      }
+    ];
+
+    # 4. 环境变量
+    sessionVariables = {
+      EDITOR = "nvim";
+      GPG_TTY = "$(tty)";
+      # 注意：PATH 在 Nix 中通常不建议直接覆盖，而是通过 home.packages 添加包。
+      # 但如果你需要保留手动路径，可以在 initExtra 中 export，或者在这里用列表拼接 (稍微麻烦点)。
+    };
+
+    # 5. 所有的“剩余代码” (Functions, zstyles, keybindings, extra PATHs)
+    initExtra = ''
+      # === PATHs ===
+      export PATH="$PATH:/Users/praveenkumar/FlutterDev/flutter/bin"
+      export PATH="$GOPATH/bin:$PATH"
+      export PATH="$PATH:/Users/praveenkumar/istio-1.26.3/bin"
+      # Homebrew path (Nix-darwin 通常会自动处理，但为了保险可以留着)
+      if [[ -f "/opt/homebrew/bin/brew" ]]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+      fi
+
+      # === Zsh Vi Mode Customization ===
+      ZVM_VI_ESCAPE_BINDKEY=jj
+      ZVM_VI_INSERT_ESCAPE_BINDKEY=$ZVM_VI_ESCAPE_BINDKEY
+      ZVM_VI_VISUAL_ESCAPE_BINDKEY=$ZVM_VI_ESCAPE_BINDKEY
+      ZVM_VI_OPPEND_ESCAPE_BINDKEY=$ZVM_VI_ESCAPE_BINDKEY
+      
+      # Restore FZF Ctrl+R
+      # (Home Manager 的 fzf 模块通常会自动处理这个，如果发现无效再保留下面这行)
+      zvm_after_init_commands+=('source ${pkgs.fzf}/share/fzf/key-bindings.zsh')
+
+      # === Completion Styling (FZF-Tab) ===
+      zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+      zstyle ':completion:*' list-colors "''${(s.:.)LS_COLORS}"
+      zstyle ':completion:*' menu no
+      zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+      zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+
+      # === Pomodoro Functions ===
+      function work () {
+        timer 25m
+        osascript -e 'display notification "Pomodoro" with title "Work Timer is up! Take a Break 😊" sound name "Crystal"'
+      }
+
+      function rest () {
+        timer 5m
+        osascript -e 'display notification "Pomodoro" with title "Break is over! Get back to work 😬" sound name "Crystal"'
+      }
+      
+      # source <(kubectl completion zsh)
+    '';
+  };
+
+  homebrew = {
+    enable = true;
+    onActivation.cleanup = "zap";
+    onActivation.autoUpdate = true;
+    onActivation.upgrade = true;
+
+    taps = [
+        "caarlos0/tap"
+        "felixkratz/formulae"
+        "TheBoredTeam/boring-notch""
+        # "jandedobbeleer/oh-my-posh"
+    ];
+    brews = [
+        "utimer"
+        "cloudflared"
+        "doctl"
+        # "eza"
+        "fastfetch"
+        "fd"
+        "sketchybar"
+        # "fzf"
+        "gemini-cli"
+        "git"
+        "glow"
+        "go"
+        "helm"
+        # "oh-my-posh"
+        # "lazygit"
+        "neovim"
+        "redis"
+        "ripgrep"
+        "tmux"
+        "tpm"
+        "yazi"
+        # "zoxide"
+        "mihomo"
+        "fish"
+        "kubernetes-cli"
+        "fancy-cat"
+        "btop"
+    ];
+    casks = [
+        "1password-cli"
+        "claude-code"
+        "font-sf-pro"
+        "ghostty"
+        "kitty"
+        "obsidian"
+        "raycast"
+        "sf-symbols"
+        "wezterm"
+        "clash-verge-rev"
+        "qq"
+        "firefox"
+        "bluestacks"
+        "bilibili"
+        "anki"
+        "visual-studio-code"
+        "wechat"
+        "squirrel-app"
+        "tailscale-app"
+        "tencent-meeting"
+        "steam"
+        "boring-notch"
+    ];
+  };
+}
