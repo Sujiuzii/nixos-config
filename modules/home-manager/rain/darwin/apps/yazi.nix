@@ -26,7 +26,7 @@ in with lib; {
         };
       };
     };
-    xdg.configFile."yazi/keymap.toml".source = ../../../../../dotfiles/yazi/keymap.toml;
-    xdg.configFile."yazi/theme.toml".source = ../../../../../dotfiles/yazi/theme.toml;
+    xdg.configFile."yazi/keymap.toml".source = yazi/keymap.toml;
+    xdg.configFile."yazi/theme.toml".source = yazi/theme.toml;
   };
 }

@@ -58,7 +58,12 @@ in with lib; {
           "alt-3" = "workspace 3";
           "alt-4" = "workspace 4";
           "alt-5" = "workspace 5";
-          "alt-i" = "workspace I";
+          "alt-6" = "workspace 6";
+          "alt-7" = "workspace 7";
+          "alt-8" = "workspace 8";
+          "alt-9" = "workspace 9";
+          "alt-0" = "workspace 0";
+          "alt-d" = "workspace D";
           "alt-s" = "workspace S";
           "alt-b" = "workspace B";
           "alt-t" = "workspace T";
@@ -71,7 +76,12 @@ in with lib; {
           "alt-shift-3" = "move-node-to-workspace 3";
           "alt-shift-4" = "move-node-to-workspace 4";
           "alt-shift-5" = "move-node-to-workspace 5";
-          "alt-shift-i" = "move-node-to-workspace I";
+          "alt-shift-6" = "move-node-to-workspace 6";
+          "alt-shift-7" = "move-node-to-workspace 7";
+          "alt-shift-8" = "move-node-to-workspace 8";
+          "alt-shift-9" = "move-node-to-workspace 9";
+          "alt-shift-0" = "move-node-to-workspace 0";
+          "alt-shift-d" = "move-node-to-workspace D";
           "alt-shift-s" = "move-node-to-workspace S";
           "alt-shift-b" = "move-node-to-workspace B";
           "alt-shift-t" = "move-node-to-workspace T";
@@ -119,12 +129,8 @@ in with lib; {
           { "if".app-id = "company.thebrowser.Browser"; run = "move-node-to-workspace B"; }
           { "if".app-id = "com.microsoft.VSCode"; run = "move-node-to-workspace V"; }
           { "if".app-id = "com.todesktop.230313mzl4w4u92"; run = "move-node-to-workspace V"; }
-          { "if".app-id = "com.google.android.studio"; run = "move-node-to-workspace I"; }
-          { "if".app-id = "com.apple.dt.Xcode"; run = "move-node-to-workspace I"; }
-          { "if".app-id = "com.tinyspeck.slackmacgap"; run = "move-node-to-workspace S"; }
-          { "if".app-id = "com.apple.iphonesimulator"; run = "move-node-to-workspace T"; }
-          { "if".app-id = "notion.id"; run = "move-node-to-workspace N"; }
           { "if".app-id = "com.tencent.qq"; run = "move-node-to-workspace D"; }
+          { "if".app-id = "com.tencent.xinWeChat"; run = "move-node-to-workspace N"; }
           { "if".app-id = "com.apple.finder"; run = "layout floating"; }
           { "if".app-id = "com.apple.ActivityMonitor"; run = "layout floating"; }
           { "if".app-id = "NULL-APP-BUNDLE-ID"; run = "move-node-to-workspace T"; }

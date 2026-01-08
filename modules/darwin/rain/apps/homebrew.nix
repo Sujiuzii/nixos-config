@@ -15,23 +15,26 @@ in with lib; {
         autoUpdate = true;
         upgrade = true;
       };
+      caskArgs = {
+        no_quarantine = true;
+      };
       taps = [
         "caarlos0/tap"
         "felixkratz/formulae"
-        # "homebrew/cask-fonts"
       ];
       brews = [
-        "caarlos0/tap/timer" "cloudflared" "doctl" "fastfetch" "fd" "sketchybar" 
-        "gemini-cli" "git" "glow" "go" "helm" "neovim" "redis" 
-        "ripgrep" "yazi" "mihomo" "fish" "kubernetes-cli" 
-        "fancy-cat" "btop" "zoxide" "eza" "fzf"
+        "caarlos0/tap/timer" "fastfetch" "fd" "sketchybar" 
+        "gemini-cli" "git" "glow" "neovim"
+        "ripgrep" "yazi" "mihomo" "fish" 
+        "btop" "zoxide" "eza" "fzf"
       ];
       casks = [
-        "1password-cli" "claude-code" "font-sf-pro" "ghostty" "kitty"
-        "obsidian" "raycast" "sf-symbols" "wezterm" "clash-verge-rev"
+        "claude-code" "font-sf-pro" "ghostty" "kitty"
+        "raycast" "sf-symbols" "wezterm" "clash-verge-rev"
         "qq" "firefox" "bluestacks" "bilibili" "anki" "visual-studio-code"
-        "wechat" "tailscale-app"
-        "tencent-meeting" "steam" "neteasemusic" "typora"
+        "tencent-meeting" "steam" "neteasemusic" "typora" "foxit-pdf-editor"
+        "wechat" "tailscale-app" "squirrel-app" "telegram-desktop"
+        "TheBoredTeam/boring-notch/boring-notch"
       ];
     };
   };

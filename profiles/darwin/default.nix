@@ -26,10 +26,10 @@
       shell.zsh.enable = true;
       shell.oh-my-posh.enable = true;
       term.kitty.enable = true;
-      term.ghostty.enable = true;
       term.wezterm.enable = true;
       term.tmux.enable = true;
       apps.yazi.enable = true;
+      apps.nvim.enable = true;
       services.sketchybar.enable = true;
     };
 

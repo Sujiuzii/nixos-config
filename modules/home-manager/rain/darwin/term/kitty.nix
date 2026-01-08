@@ -34,14 +34,14 @@ in with lib; {
         font_features MapleMono-NF-BoldItalic +ss01 +cv03
       '';
     };
-    xdg.configFile."kitty/catppuccin-theme.conf".source = ../../../../../dotfiles/kitty/catppuccin-theme.conf;
-    xdg.configFile."kitty/current-theme.conf".source = ../../../../../dotfiles/kitty/current-theme.conf;
-    xdg.configFile."kitty/cyberdream.conf".source = ../../../../../dotfiles/kitty/cyberdream.conf;
-    xdg.configFile."kitty/oxocarbon.conf".source = ../../../../../dotfiles/kitty/oxocarbon.conf;
-    xdg.configFile."kitty/toggle-transparency.sh".source = ../../../../../dotfiles/kitty/toggle-transparency.sh;
-    xdg.configFile."kitty/tokyonight_day.conf".source = ../../../../../dotfiles/kitty/tokyonight_day.conf;
-    xdg.configFile."kitty/tokyonight_moon.conf".source = ../../../../../dotfiles/kitty/tokyonight_moon.conf;
-    xdg.configFile."kitty/tokyonight_night.conf".source = ../../../../../dotfiles/kitty/tokyonight_night.conf;
-    xdg.configFile."kitty/tokyonight_storm.conf".source = ../../../../../dotfiles/kitty/tokyonight_storm.conf;
+    xdg.configFile."kitty/catppuccin-theme.conf".source = kitty/catppuccin-theme.conf;
+    xdg.configFile."kitty/current-theme.conf".source = kitty/current-theme.conf;
+    xdg.configFile."kitty/cyberdream.conf".source = kitty/cyberdream.conf;
+    xdg.configFile."kitty/oxocarbon.conf".source = kitty/oxocarbon.conf;
+    xdg.configFile."kitty/toggle-transparency.sh".source = kitty/toggle-transparency.sh;
+    xdg.configFile."kitty/tokyonight_day.conf".source = kitty/tokyonight_day.conf;
+    xdg.configFile."kitty/tokyonight_moon.conf".source = kitty/tokyonight_moon.conf;
+    xdg.configFile."kitty/tokyonight_night.conf".source = kitty/tokyonight_night.conf;
+    xdg.configFile."kitty/tokyonight_storm.conf".source = kitty/tokyonight_storm.conf;
   };
 }
