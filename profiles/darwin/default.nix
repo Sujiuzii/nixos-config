@@ -24,6 +24,7 @@
     # Enable the home-manager modules
     rain.home.darwin = {
       shell.zsh.enable = true;
+      shell.direnv.enable = true;
       shell.oh-my-posh.enable = true;
       term.kitty.enable = true;
       term.wezterm.enable = true;
