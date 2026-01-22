@@ -8,6 +8,7 @@
   rain.darwin = {
     system.enable = true;
     apps.homebrew.enable = true;
+    apps.native.enable = true;
     services.aerospace.enable = true;
     fonts.enable = true;
   };

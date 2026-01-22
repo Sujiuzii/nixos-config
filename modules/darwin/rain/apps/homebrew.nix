@@ -29,12 +29,13 @@ in with lib; {
         "btop" "zoxide" "eza" "fzf"
       ];
       casks = [
-        "claude-code" "font-sf-pro" "ghostty" "kitty"
+        "claude-code" "font-sf-pro" "ghostty" "kitty" "sioyek"
         "raycast" "sf-symbols" "wezterm" "clash-verge-rev"
         "qq" "firefox" "bluestacks" "bilibili" "anki" "visual-studio-code"
         "tencent-meeting" "steam" "neteasemusic" "typora" "foxit-pdf-editor"
         "wechat" "tailscale-app" "squirrel-app" "telegram-desktop"
-        "TheBoredTeam/boring-notch/boring-notch"
+        "TheBoredTeam/boring-notch/boring-notch" "caffeine" "notion"
+        "notion-calendar" "codex"
       ];
     };
   };
