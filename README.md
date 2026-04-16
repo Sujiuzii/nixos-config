@@ -24,15 +24,19 @@
 ## 目录结构
 
 - `flake.nix`: 项目入口，定义了系统和 Home Manager 的配置。
-- `hosts/`: 不同主机的具体配置入口。
-  - `lenovo/`: NixOS 配置。
-  - `macos/`: Darwin 配置。
+- `systems/`: 系统级入口。
+  - `aarch64-darwin/macos/`: macOS 的 nix-darwin 配置。
+  - `x86_64-linux/lenovo/`: Lenovo 的 NixOS 配置。
+- `hosts/lenovo/hardware-configuration.nix`: 当前保留的硬件配置文件。
+- `homes/`: 用户级入口。
+  - `aarch64-darwin/suhui@macos/`: macOS 的 Home Manager 配置。
+  - `x86_64-linux/suhui@lenovo/`: Lenovo 的 Home Manager 配置。
 - `modules/`: 可复用的模块。
   - `darwin/`: macOS 专属系统模块。
   - `nixos/`: NixOS 专属系统模块。
-  - `home-manager/`: 用户级软件和点文件配置 (Neovim, Zsh, Kitty, Tmux 等)。
-- `profiles/`: 通用配置文件集。
-- `pkgs/`: 自定义软件包。
+  - `home/`: 用户级软件和点文件配置 (Neovim, Zsh, Kitty, Tmux 等)。
+- `packages/`: Snowfall 风格的包输出目录。
+- `pkgs/`: 当前 overlay 仍在复用的包实现目录。
 - `overlays/`: Nixpkgs 覆盖层。
 
 ## 配置哲学
@@ -59,6 +63,15 @@ darwin-rebuild switch --flake .#macos
 
 ```bash
 sudo nixos-rebuild switch --flake .#lenovo
+```
+
+### Home Manager
+
+单独验证用户环境：
+
+```bash
+home-manager switch --flake .#suhui@macos
+home-manager switch --flake .#suhui@lenovo
 ```
 
 ## 许可证
