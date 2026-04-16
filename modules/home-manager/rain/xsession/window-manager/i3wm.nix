@@ -1,7 +1,7 @@
-{ config, lib, outputs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
-  polybar-config = outputs.packages.polybar-config;
+  polybar-config = pkgs.rain.polybar-config;
   cfg = config.rain.home.xsession.window-manager.i3;
 in with lib; {
   imports = [

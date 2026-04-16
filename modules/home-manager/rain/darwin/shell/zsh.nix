@@ -90,7 +90,14 @@ in with lib; {
       ];
 
       initContent = ''
-        # === Homebrew Setup (MacOS) ===
+        if [[ -f "$HOME/.config/codex/keys.sh" ]]; then
+          source "$HOME/.config/codex/keys.sh"
+        fi
+
+        if [[ -f "$HOME/.config/judge_api.sh" ]]; then
+          source "$HOME/.config/judge_api.sh"
+        fi
+
         if [[ -f "/opt/homebrew/bin/brew" ]]; then
           eval "$(/opt/homebrew/bin/brew shellenv)"
         fi

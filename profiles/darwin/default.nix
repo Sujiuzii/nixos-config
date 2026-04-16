@@ -9,7 +9,8 @@
     system.enable = true;
     apps.homebrew.enable = true;
     apps.native.enable = true;
-    services.aerospace.enable = true;
+    services.aerospace.enable = false;
+
     fonts.enable = true;
   };
 
@@ -32,7 +33,7 @@
       term.tmux.enable = true;
       apps.yazi.enable = true;
       apps.nvim.enable = true;
-      services.sketchybar.enable = true;
+      services.sketchybar.enable = false;
     };
 
     home.stateVersion = "24.11"; # Added missing stateVersion
