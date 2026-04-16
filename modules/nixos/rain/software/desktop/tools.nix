@@ -30,8 +30,8 @@ in with lib; {
       # notify
       libnotify
       dunst
-    ];
 
-    programs.adb.enable = true;
+      android-tools
+    ];
   };
 }

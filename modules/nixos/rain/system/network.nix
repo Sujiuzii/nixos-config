@@ -23,7 +23,7 @@ in with lib; {
 
     services.resolved = {
       enable = true;
-      dnssec = "false";
+      settings.Resolve.DNSSEC = "false";
     };
 
     services.tailscale.enable = mkIf cfg.tailscale.enable true;

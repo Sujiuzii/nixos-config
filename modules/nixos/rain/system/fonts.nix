@@ -22,7 +22,7 @@ in with lib; {
         font-awesome
         icomoon-feather
 
-        source-han-sans-simplified-chinese
+        source-han-sans
 
         # (nerdfonts.override { fonts = [ "Hack" "FiraCode" "JetBrainsMono" "Iosevka" ]; })
         nerd-fonts.hack
@@ -33,7 +33,7 @@ in with lib; {
         # normal fonts
         noto-fonts
         noto-fonts-cjk-sans
-        noto-fonts-emoji
+        noto-fonts-color-emoji
       ];
    
       fontconfig = {

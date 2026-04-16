@@ -20,22 +20,25 @@ in with lib; {
       };
       taps = [
         "caarlos0/tap"
-        "felixkratz/formulae"
       ];
       brews = [
-        "caarlos0/tap/timer" "fastfetch" "fd" "sketchybar" 
-        "gemini-cli" "git" "glow" "neovim"
-        "ripgrep" "yazi" "mihomo" "fish" 
-        "btop" "zoxide" "eza" "fzf"
+        "caarlos0/tap/timer" "fastfetch" "fd"
+        "gemini-cli" "git" "glow" "neovim" "lima"
+        "ripgrep" "yazi" "mihomo" "fish" "subversion"
+        "btop" "zoxide" "eza" "fzf" "lume" "docker"
+        "jenkins" "kubernetes-cli" "wireshark"
+        "python@3.10"
       ];
       casks = [
         "claude-code" "font-sf-pro" "ghostty" "kitty" "sioyek"
         "raycast" "sf-symbols" "wezterm" "clash-verge-rev"
         "qq" "firefox" "bluestacks" "bilibili" "anki" "visual-studio-code"
-        "tencent-meeting" "steam" "neteasemusic" "typora" "foxit-pdf-editor"
+        "tencent-meeting" "steam" "neteasemusic" "typora" 
         "wechat" "tailscale-app" "squirrel-app" "telegram-desktop"
         "TheBoredTeam/boring-notch/boring-notch" "caffeine" "notion"
-        "notion-calendar" "codex"
+        "notion-calendar" "codex" "orbstack" "zotero" "slack"
+        "finetune" "codex-app" "ungoogled-chromium" "ungoogled-chromium"
+        "wireshark-app"
       ];
     };
   };
