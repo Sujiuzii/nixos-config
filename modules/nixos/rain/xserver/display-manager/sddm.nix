@@ -1,9 +1,9 @@
-{ config, lib, outputs, ... }:
+{ config, lib, pkgs, ... }:
 
 with lib; {
   config = mkIf (config.rain.xserver.display-manager == "sddm") {
     environment.systemPackages = [
-      outputs.packages.sddm-rose-pine
+      pkgs.rain.sddm-rose-pine
     ];
 
     services.displayManager = {

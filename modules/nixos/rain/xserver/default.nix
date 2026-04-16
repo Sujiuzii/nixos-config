@@ -1,12 +1,6 @@
 { ... }:
 
 {
-  imports = [
-    ./display-manager
-    ./window-manager
-    ./desktop-manager
-  ];
-
   services.xserver = {
     enable = true;
     # dpi = 144;

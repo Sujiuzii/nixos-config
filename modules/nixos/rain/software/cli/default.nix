@@ -3,10 +3,6 @@
 let
   cfg = config.rain.software.cli;
 in with lib; {
-  imports = [
-    ./neovim
-  ];
-
   options = {
     rain.software.cli.enable = lib.mkEnableOption "CLI tools";
   };

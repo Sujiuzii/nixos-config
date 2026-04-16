@@ -1,4 +1,4 @@
-{ config, lib, outputs, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   cfg = config.rain.software.desktop.applications;
