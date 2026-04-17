@@ -7,7 +7,7 @@
 
   snowfallorg.users.suhui = { };
 
-  rain.darwin = {
+  fluffy.darwin = {
     system.enable = true;
     apps.homebrew.enable = true;
     apps.native.enable = true;

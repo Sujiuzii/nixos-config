@@ -1,4 +1,6 @@
 { ... }:
 final: _prev:
-
-import ../../pkgs { pkgs = final; }
+{
+  polybar-config = final.callPackage ../../packages/polybar-config { };
+  sddm-rose-pine = final.callPackage ../../packages/sddm-rose-pine { };
+}

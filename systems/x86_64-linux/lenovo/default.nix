@@ -19,7 +19,7 @@
 
   snowfallorg.users.suhui = { };
 
-  rain = {
+  fluffy = {
     xserver = {
       display-manager = "sddm";
       window-manager = "i3";

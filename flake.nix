@@ -1,5 +1,5 @@
 {
-  description = "A flake for daily use based on configuration of Crabtux";
+  description = "Suhui's Snowfall-based Nix configuration";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -25,7 +25,7 @@
       src = ./.;
 
       snowfall = {
-        namespace = "rain";
+        namespace = "fluffy";
       };
 
       systems.modules.nixos = [

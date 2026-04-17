@@ -6,7 +6,7 @@
     homeDirectory = "/Users/suhui";
   };
 
-  rain.home.darwin = {
+  fluffy.home.darwin = {
     shell.zsh.enable = true;
     shell.direnv.enable = true;
     shell.oh-my-posh.enable = true;

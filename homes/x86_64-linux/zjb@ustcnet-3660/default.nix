@@ -6,7 +6,7 @@
     homeDirectory = "/home/zjb";
   };
 
-  rain.home.software.cli.enable = true;
+  fluffy.home.software.cli.enable = true;
 
   systemd.user.startServices = "sd-switch";
   targets.genericLinux.enable = true;

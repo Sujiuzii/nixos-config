@@ -6,7 +6,7 @@
     homeDirectory = "/home/suhui";
   };
 
-  rain.home = {
+  fluffy.home = {
     software = {
       desktop.enable = true;
       cli.enable = true;

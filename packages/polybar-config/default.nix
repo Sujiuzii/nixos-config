@@ -1,3 +1,11 @@
-{ stdenv, ... } @ args:
+{ stdenv, ... }:
 
-import ../../pkgs/polybar-config args
+stdenv.mkDerivation {
+  name = "polybar-config";
+  phases = [ "unpackPhase" "installPhase" ];
+  src = ./config;
+  installPhase = ''
+    mkdir -p $out
+    cp -r $src $out/docky
+  '';
+}
